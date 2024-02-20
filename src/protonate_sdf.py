@@ -30,10 +30,10 @@ from itertools import combinations
 
 def read_sdf_file(file_path):
     """
-    Read an .sdf or .sdf.gz file and return a list of RDKit molecule objects.
+    Read an .sdf file and return a list of RDKit molecule objects.
 
     Parameters:
-    - file_path (str): Path to the input .sdf or .sdf.gz file.
+    - file_path (str): Path to the input .sdf file.
 
     Returns:
     - list: List of RDKit molecule objects.
