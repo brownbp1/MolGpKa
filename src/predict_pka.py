@@ -75,6 +75,15 @@ def predict_for_protonate(mol, uncharged=True):
     acid_dict = predict_acid(mol)
     return base_dict, acid_dict, mol
 
+def predict_for_protonate_3d(mol, uncharged=True):
+    if uncharged:
+        un = rdMolStandardize.Uncharger()
+        mol = un.uncharge(mol)
+    mol = AllChem.AddHs(mol)
+    base_dict = predict_base(mol)
+    acid_dict = predict_acid(mol)
+    return base_dict, acid_dict, mol
+
 
 if __name__=="__main__":
     mol = Chem.MolFromSmiles("CN(C)CCCN1C2=CC=CC=C2SC2=C1C=C(C=C2)C(C)=O")

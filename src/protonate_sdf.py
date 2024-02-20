@@ -19,7 +19,7 @@ Example:
 """
 
 import argparse
-from predict_pka import predict_for_protonate
+from predict_pka import predict_for_protonate_3d
 from copy import deepcopy
 from rdkit import Chem
 from rdkit.Chem import AllChem
@@ -196,7 +196,7 @@ def protonate_mol(mol, ph, tph):
     Returns:
     - list: List of protonated RDKit molecule objects.
     """
-    obase_dict, oacid_dict, omol = predict_for_protonate(mol)
+    obase_dict, oacid_dict, omol = predict_for_protonate_3d(mol)
     mc = modify_mol(omol, oacid_dict, obase_dict)
     stable_data, unstable_data = get_pKa_data(mc, ph, tph)
     new_mols = []
@@ -211,6 +211,7 @@ def protonate_mol(mol, ph, tph):
             modify_stable_pka(new_mol, stable_data)
             new_unmols = modify_unstable_pka(new_mol, unstable_data, i)
             new_mols.extend(new_unmols)
+    new_mols = [AllChem.RemoveHs(mol) for mol in new_mols]
     return new_mols
 
 def argument_parser():
